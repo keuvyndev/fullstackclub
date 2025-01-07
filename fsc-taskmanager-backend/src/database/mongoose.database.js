@@ -1,10 +1,13 @@
 const mongoose = require('mongoose');
 
 const connectToDatabase = async () => {
-   await mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}
-      @fsc-taskmanagercluster.hbvt3.mongodb.net/?retryWrites=true&w=majority&
-      appName=FSC-TaskManagerCluster`, async () => await console.log('Funcionou!')
-   );
+
+   try {
+      await mongoose.connect(process.env.DB_URL).then(console.log('MongoDB conectando...'))
+      console.log("MongoDB conectado!");
+   } catch (error) {
+      console.error(`Erro ao conectar-se com o MongoDB: ${error}`);
+   }
 }
 
 module.exports = connectToDatabase;
