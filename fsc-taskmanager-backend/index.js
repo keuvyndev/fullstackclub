@@ -59,7 +59,7 @@ app.delete("/tasks/:id", async (requisicao, resultado) => {
 
       // Trata retorno caso ID não exista
       if (!taskToDelete) {
-         return resultado.status(500).send('Esta tarefa não foi encontrada!')
+         return resultado.status(404).send('Esta tarefa não foi encontrada!') // HTTP 404: Não encontrado
       }
 
       const deletedTask = await TaskModel.findByIdAndDelete(taskId);
@@ -72,5 +72,23 @@ app.delete("/tasks/:id", async (requisicao, resultado) => {
    }
 
 });
+
+// Efetua requisição GET e exporta na rota 'localhost:8000/tasks' com 'id' dinâmico
+// Função: Retorna dados de uma task
+app.get("/tasks/:id", async (req, res) => {
+   try {
+      const taskParamId = (req.params.id);
+      const task = await TaskModel.findById(taskParamId);
+
+      if (!task) {
+         return res.status(404).send("Task não encontrada!") // HTTP 404: Não encontrado
+      }
+
+      res.status(200).send(task);
+   } catch (error) {
+      res.send(500).send(error.message);
+   }
+
+})
 
 app.listen(8000, () => console.log("Listening on port 8000!"));
