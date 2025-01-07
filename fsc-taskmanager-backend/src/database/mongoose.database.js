@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+// Efetua conexão com o banco de dados MongoDB Cloud usando as enviroments
 const connectToDatabase = async () => {
 
    try {
@@ -10,4 +11,5 @@ const connectToDatabase = async () => {
    }
 }
 
+// Exporta o módulo
 module.exports = connectToDatabase;
