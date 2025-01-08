@@ -1,94 +1,22 @@
-// Importa bibliotecas externas
+// Importa os módulos externos
 const express = require("express");
 const dotenv = require("dotenv");
+const TaskRouter = require('./src/routes/task.routes')
 
-//Importa bibliotecas internas
-const connectToDatabse = require("./src/database/mongoose.database");
-const TaskModel = require("./src/models/task.model");
+// Importa os módulos internos
+const connectToDatabase = require('./src/database/mongoose.database')
+const TaskModel = require('./src/models/task.model')
 
-// Configura variáveis de ambiente
+// Carrega as variáveis de ambiente
 dotenv.config();
+
+// Inicializa o express e permite uso de JSON no body
 const app = express();
-app.use(express.json()); //Permite receber JSON na body das requisições
+app.use(express.json());
 
-connectToDatabse();
+connectToDatabase();
 
-// Efetua requisição GET e exporta na rota 'localhost:8000/tasks'
-// Função: Capturar tasks pendentes
-app.get("/tasks", async (req, res) => {
-
-   try {
-
-      const tasks = await TaskModel.find({});
-      res.status(200).send(tasks);
-
-   } catch (error) {
-
-      res.status(500).send(error.message);
-      //console.error(error);
-
-   }
-
-});
-
-// Efetua requisição POST e exporta na rota 'localhost:8000/tasks'
-// Função: Criar uma nova task
-app.post("/tasks", async (requisicao, resultado) => {
-   try {
-
-      const newTask = new TaskModel(requisicao.body);
-      await newTask.save();
-      resultado.status(201).send(newTask) // HTTP 201: Criação realizada com sucesso!
-
-   } catch (error) {
-
-      resultado.status(500).send(error.message)
-
-   }
-});
-
-// Efetua requisição DELETE e exporta na rota 'localhost:8000/tasks' com 'id' dinâmico
-// Função: Deleta uma nova task
-app.delete("/tasks/:id", async (requisicao, resultado) => {
-
-   try {
-
-      const taskId = requisicao.params.id
-
-      const taskToDelete = await TaskModel.findById(taskId);
-
-      // Trata retorno caso ID não exista
-      if (!taskToDelete) {
-         return resultado.status(404).send('Esta tarefa não foi encontrada!') // HTTP 404: Não encontrado
-      }
-
-      const deletedTask = await TaskModel.findByIdAndDelete(taskId);
-      resultado.status(200).send(deletedTask)
-
-   } catch (error) {
-
-      resultado.status(500).send(error.message)
-
-   }
-
-});
-
-// Efetua requisição GET e exporta na rota 'localhost:8000/tasks' com 'id' dinâmico
-// Função: Retorna dados de uma task
-app.get("/tasks/:id", async (req, res) => {
-   try {
-      const taskParamId = (req.params.id);
-      const task = await TaskModel.findById(taskParamId);
-
-      if (!task) {
-         return res.status(404).send("Task não encontrada!") // HTTP 404: Não encontrado
-      }
-
-      res.status(200).send(task);
-   } catch (error) {
-      res.send(500).send(error.message);
-   }
-
-})
+// Recebe rotas tercerizadas
+app.use('/tasks', TaskRouter);
 
 app.listen(8000, () => console.log("Listening on port 8000!"));
