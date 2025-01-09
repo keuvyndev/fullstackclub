@@ -50,7 +50,7 @@ class TaskController {
    * Descrição: Efetua requisição do tipo POST criando uma nova task apartir do body.
    */
 
-   async post() {
+   async create() {
       try {
          const newTask = new TaskModel(this.req.body);
          await newTask.save();
@@ -65,7 +65,7 @@ class TaskController {
    * Descrição: Efetua requisição do tipo PATCH atribuindo o novo status a task através da ID.
    */
 
-   async patch() {
+   async update() {
 
       try {
          const taskParamId = this.req.params.id;
@@ -76,11 +76,11 @@ class TaskController {
          const allowedUpdate = ['isCompleted']
          const requestedUpdates = Object.keys(taskData); // Retorna as chaves do JSON do body
 
-         for (keyToUpdate of requestedUpdates) {
-            if (allowedUpdate.includes(keyToUpdate)) {
-               taskToUpdate[keyToUpdate] = this.req.body[keyToUpdate]
+         for (const update of requestedUpdates) {
+            if (allowedUpdate.includes(update)) {
+               taskToUpdate[update] = taskData[update];
             } else {
-               return this.res.status(500).send(`${keyToUpdate} não pode ser alterado!`)
+               return this.res.status(500).send(`${update} não pode ser alterado!`)
             }
          }
          await taskToUpdate.save();

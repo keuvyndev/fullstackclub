@@ -21,13 +21,13 @@ router.get("/:id", async (req, res) => {
 // Efetua requisição POST e exporta na rota 'localhost:8000/tasks'
 // Função: Criar uma nova task
 router.post("/", async (req, res) => {
-   return new TaskController(req, res).post();
+   return new TaskController(req, res).create();
 });
 
 // Efetua requisição PATCH e exporta na rota 'localhost:8000/tasks' com 'id' dinâmico
 // Função: Retorna uma task atualizada
 router.patch("/:id", async (req, res) => {
-   return new TaskController(req, res).patch();
+   return new TaskController(req, res).update();
 });
 
 // Efetua requisição DELETE e exporta na rota 'localhost:8000/tasks' com 'id' dinâmico
