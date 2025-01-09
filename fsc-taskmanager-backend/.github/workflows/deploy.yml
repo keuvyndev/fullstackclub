@@ -1,0 +1,20 @@
+name: Deploy_taskManager
+
+on:
+	push:
+			branches:
+			- master
+			
+jobs:
+	build:
+		runs-on: ubuntu-latest
+		steps:
+			- uses: actions/checkout@v2
+			- uses: akhileshns/heroku-deploy@v3.12.12 #This is the action
+			- name: Navigate to subfolder
+        working-directory: ./fsc-taskmanager-backend  # Caminho da aplicação.
+        run: ls  # Apenas para verificar os arquivos disponíveis.
+				with:
+					heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+					heroku_app_name: "teixeira-task-manager" #Must be unique in Heroku
+					herkou_email: "keuvyntdev@gmail.com"
