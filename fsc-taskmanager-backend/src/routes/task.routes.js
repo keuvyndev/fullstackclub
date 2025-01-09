@@ -1,44 +1,15 @@
 //Importando módulos
 const express = require('express');
+const TaskController = require('../controllers/task.controller')
 const TaskModel = require('../models/task.model')
 
 // Definindo rota express
 const router = express.Router();
 
-// Efetua requisição GET e exporta na rota 'localhost:8000/tasks'
-// Função: Capturar tasks pendentes
-router.get("/", async (req, res) => {
-
-   try {
-
-      const tasks = await TaskModel.find({});
-      res.status(200).send(tasks);
-
-   } catch (error) {
-
-      res.status(500).send(error.message);
-      //console.error(error);
-
-   }
-
-});
-
 // Efetua requisição GET e exporta na rota 'localhost:8000/tasks' com 'id' dinâmico
 // Função: Retorna dados de uma task
 router.get("/:id", async (req, res) => {
-   try {
-      const taskParamId = (req.params.id);
-      const task = await TaskModel.findById(taskParamId);
-
-      if (!task) {
-         return res.status(404).send("Task não encontrada!") // HTTP 404: Não encontrado
-      }
-
-      res.status(200).send(task);
-   } catch (error) {
-      res.send(500).send(error.message);
-   }
-
+   return new TaskController(req, res).getTasks();
 });
 
 // Efetua requisição POST e exporta na rota 'localhost:8000/tasks'
