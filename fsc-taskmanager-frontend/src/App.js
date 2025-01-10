@@ -1,15 +1,33 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from "react"
+import TaskItem from './components/taskItem';
 
-function App() {
+const App = () => {
+
+  // eslint-disable-next-line no-unused-vars
+  const [tasks, setTasks] = useState(
+    [
+      {
+        id: 1,
+        description: "Estudar Programação",
+        isComplete: false
+      },
+      {
+        id: 2,
+        description: "Ler",
+        isComplete: false,
+      },
+    ]
+  )
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>Hello World!</h1>
-      </header>
-    </div>
+    <>
+      {tasks.map((task) => (
+        <TaskItem key={task.id} task={task} />
+      ))}
+    </>
   );
+
 }
 
 export default App;
