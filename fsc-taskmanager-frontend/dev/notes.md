@@ -1,5 +1,11 @@
 Anotações
-fecth: Significa "pegar"
+
+- fecth: Significa "pegar"
+- Ao criar componentes use a extensão "jsx". O react entenderá que se trata de um componente de ajudará na criação.
+
+Extensões VSCode
+
+- Simple React Snippets
 
 Bibliotecas usadas
 
