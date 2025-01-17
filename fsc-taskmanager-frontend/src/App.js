@@ -1,10 +1,10 @@
 import './App.css';
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import axios from "axios"
 import TaskItem from './components/taskItem';
 
 const App = () => {
 
-  // eslint-disable-next-line no-unused-vars
   const [tasks, setTasks] = useState(
     [
       {
@@ -19,6 +19,22 @@ const App = () => {
       },
     ]
   )
+
+  // Método que captura as tasks no backend
+  const fecthTasks = async () => {
+    try {
+      const { data } = await axios.get('http://localhost:8000/tasks')
+      setTasks(data)
+      console.log(data);
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  // Consulta as tasks assim que o componente é montado
+  useEffect(() => {
+    fecthTasks()
+  }, [])
 
   return (
     <>
