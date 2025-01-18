@@ -1,6 +1,7 @@
 // Importa os módulos externos
 const express = require("express");
 const dotenv = require("dotenv");
+const cors = require("cors")
 const TaskRouter = require('./src/routes/task.routes')
 
 // Importa os módulos internos
@@ -12,6 +13,7 @@ dotenv.config();
 
 // Inicializa o express e permite uso de JSON no body
 const app = express();
+app.use(cors())
 app.use(express.json());
 
 connectToDatabase();

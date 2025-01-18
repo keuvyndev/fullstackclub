@@ -51,3 +51,10 @@ Requer adição no index.html e mudança no index.js
 ```bash
 yarn add sass
 ```
+
+- ReactIcon: Icones React
+- Todos os ícones: https://react-icons.github.io/react-icons/?_gl=1*segjeb*_ga*ODUxNzAwNTc2LjE3MzA1NTg4OTE.*_ga_37GXT4VGQK*MTczNzIyMjMzNC43Ni4xLjE3MzcyMjI2MTAuMC4wLjA.
+
+```bash
+yarn add react-icons
+```
