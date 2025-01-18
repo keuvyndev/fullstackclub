@@ -8,7 +8,7 @@ import CustomButton from "./CustomButton";
 
 import "./AddTask.scss";
 
-const AddTask = () => {
+const AddTask = ({ fetchTasks }) => {
     const [task, setTasks] = useState("");
 
     const onChange = (e) => {
@@ -27,7 +27,15 @@ const AddTask = () => {
                 description: task,
                 isCompleted: false,
             });
-        } catch (error) {}
+
+            // Consulta novamente as tasks após atualização
+            await fetchTasks();
+
+            // Limpa o Input
+            setTasks("");
+        } catch (error) {
+            toast.error("Algo deu errado ...");
+        }
     };
 
     return (

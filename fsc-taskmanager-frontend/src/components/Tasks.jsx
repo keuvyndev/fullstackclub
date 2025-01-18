@@ -10,7 +10,7 @@ const Tasks = () => {
     const [tasks, setTasks] = useState([]);
 
     // Método que captura as tasks no backend
-    const fecthTasks = async () => {
+    const fetchTasks = async () => {
         try {
             const { data } = await axios.get("http://localhost:8000/tasks");
             setTasks(data);
@@ -21,7 +21,7 @@ const Tasks = () => {
 
     // Consulta as tasks assim que o componente é montado
     useEffect(() => {
-        fecthTasks();
+        fetchTasks();
     }, []);
 
     console.log(
@@ -36,7 +36,7 @@ const Tasks = () => {
 
             <div className="last-tasks">
                 <h3>Últimas Tarefas</h3>
-                <AddTask />
+                <AddTask fetchTasks={fetchTasks} />
                 <div className="tasks-list">
                     {tasks
                         .filter((task) => task.isCompleted === false)
