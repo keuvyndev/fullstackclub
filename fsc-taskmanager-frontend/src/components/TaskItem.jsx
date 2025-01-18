@@ -11,6 +11,8 @@ const TaskItem = ({ task, fetchTasks }) => {
 
             // Atualiza as tarefas
             await fetchTasks();
+
+            toast.success("A tarefa foi removida com sucesso!");
         } catch (e) {
             toast.error("Algo deu errado ...");
         }
