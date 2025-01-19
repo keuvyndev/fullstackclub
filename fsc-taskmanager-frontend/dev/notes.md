@@ -74,7 +74,7 @@ yarn add react-toastify
 
 - Requer configuração adicional no index.js
 
-```index.js
+````index.js
    import React from 'react';
 import ReactDOM from 'react-dom/client';
 
@@ -108,6 +108,14 @@ root.render(
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
 
+- React Router DOM: Permite trabalhar com rotas no react.
+- Obs: Requer configurações adicionais no index.js
+
+```bash
+yarn add react-router-dom@6.0.2
+yarn add react-router-dom@latest
+````
+
 ```
 
 // Eventos usados
@@ -119,3 +127,4 @@ passado que ele só deveria ser executado quando o item "Task" mudasse. Poupando
 onKeyDown: Para executar a adição de uma task ao pressionar "Enter"
 onChange: Para escutar quando o valor do "Input" mudar.
 onClick: Para vincular um método de click em um ícone.
+```
