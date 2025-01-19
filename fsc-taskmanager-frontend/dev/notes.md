@@ -2,6 +2,7 @@ Anotações
 
 - fecth: Significa "pegar"
 - Ao criar componentes use a extensão "jsx". O react entenderá que se trata de um componente de ajudará na criação.
+- Ao usar (\_e) no "Catch" de um "Try", a variavel é ignorada e não é criada em memória.
 
 Extensões VSCode
 
