@@ -5,6 +5,7 @@
     padding: 56px 28px;
     position: relative;
 
+    // Resolução para tablets
     @media (max-width: 768px) {
         display: none;
     }
