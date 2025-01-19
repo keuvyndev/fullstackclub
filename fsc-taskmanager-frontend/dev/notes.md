@@ -108,3 +108,10 @@ root.render(
 reportWebVitals();
 
 ```
+
+// Eventos usados
+useState: Para criar variaveis manipulaveis no react
+useState: Para executar rotinas ao montar um componente
+onKeyDown: Para executar a adição de uma task ao pressionar "Enter"
+onChange: Para escutar quando o valor do "Input" mudar.
+onClick: Para vincular um método de click em um ícone.
