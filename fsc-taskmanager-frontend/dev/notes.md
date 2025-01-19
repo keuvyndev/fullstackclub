@@ -113,6 +113,9 @@ reportWebVitals();
 // Eventos usados
 useState: Para criar variaveis manipulaveis no react
 useState: Para executar rotinas ao montar um componente
+useMemo: No componente "Tasks" estava sendo executando filter e map toda vez que o componente era renderizado, o que estava consumindo
+muita memória. Para resolver, usou-se useMemo que já retornava os dados do filtro, apenas quando correspondesse a regra. E no "[]", foi
+passado que ele só deveria ser executado quando o item "Task" mudasse. Poupando performace.
 onKeyDown: Para executar a adição de uma task ao pressionar "Enter"
 onChange: Para escutar quando o valor do "Input" mudar.
 onClick: Para vincular um método de click em um ícone.
