@@ -24,8 +24,6 @@ const Tasks = () => {
         fetchTasks();
     }, []);
 
-    console.log(tasks);
-
     return (
         <div className="tasks-container">
             <h2>Minhas Tarefas</h2>
