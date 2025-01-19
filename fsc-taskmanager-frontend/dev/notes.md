@@ -124,6 +124,7 @@ useState: Para executar rotinas ao montar um componente
 useMemo: No componente "Tasks" estava sendo executando filter e map toda vez que o componente era renderizado, o que estava consumindo
 useNavigate: Usado para navegar nas rotas.
 useParam: Usado para passar variáveis entre rotas.
+useCallBack: Necessário ao usar um useState dentro de um useEffect. Salva a função em memória e só a executa uma vez. Isto por que o useEffect exige que a dependencia seja passada mesmo que cause loop.
 muita memória. Para resolver, usou-se useMemo que já retornava os dados do filtro, apenas quando correspondesse a regra. E no "[]", foi
 passado que ele só deveria ser executado quando o item "Task" mudasse. Poupando performace.
 onKeyDown: Para executar a adição de uma task ao pressionar "Enter"

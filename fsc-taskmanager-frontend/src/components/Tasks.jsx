@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
 
 import "./Tasks.scss";
 
@@ -11,14 +11,15 @@ const Tasks = () => {
     const [tasks, setTasks] = useState([]);
 
     // Método que captura as tasks no backend
-    const fetchTasks = async () => {
+    // Requer useCallBack por causa do useEffect
+    const fetchTasks = useCallback(async () => {
         try {
             const { data } = await axios.get("http://localhost:8000/tasks");
             setTasks(data);
         } catch (_e) {
             toast.error("Houve um erro ao buscar as tarefas ...");
         }
-    };
+    }, []);
 
     // Faz com que o código só seja executado se "tasks" mudar.
     // Isto economiza memória pois não é necessário lupar entre filter e map em todos os itens
@@ -30,9 +31,11 @@ const Tasks = () => {
     }, [tasks]);
 
     // Executa a consulta todas as vezes que o componente é renderizado
+    // Quando um state muda, o componente é renderizado novamente, por isso
+    // Cuidado ao usar useEffect com useState!
     useEffect(() => {
         fetchTasks();
-    }, []);
+    }, [fetchTasks]);
 
     return (
         <div className="tasks-container">
