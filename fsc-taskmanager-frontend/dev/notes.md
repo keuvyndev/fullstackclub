@@ -131,3 +131,59 @@ onKeyDown: Para executar a adição de uma task ao pressionar "Enter"
 onChange: Para escutar quando o valor do "Input" mudar.
 onClick: Para vincular um método de click em um ícone.
 ```
+
+- ESLint e Prettier para regras de código e formatação.
+- Modelo usado: https://standardjs.com/
+
+```bash
+npx eslint@7.32.0 --init
+yarn -D eslint-configer-prettier (Isto é usado para desativar todas as regras que entram em conflito com o eslint)
+```
+
+```Questions
+√ How would you like to use ESLint? · style
+√ What type of modules does your project use? · esm
+√ Which framework does your project use? · react
+√ Does your project use TypeScript? · No / Yes
+√ Where does your code run? · browser, node
+√ How would you like to define a style for your project? · guide
+√ Which style guide do you want to follow? · standard
+√ What format do you want your config file to be in? · JSON
+√ Would you like to install them now with npm? · No / Yes
+```
+
+- Comando ESLINT para corrigir todos os arquivos de extensão "JSX"
+
+```bash
+yarn eslint --fix --ext .jsx .
+```
+
+- Requer configuração adicional para "eslint-configer-prettier" adicionando "prettier nos plugins:
+- (Isto é usado para desativar todas as regras que entram em conflito com o eslint)
+
+```.eslintrc.json
+{
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "extends": ["plugin:react/recommended", "standard", "prettier"],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["react"],
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off"
+  }
+}
+```
+
+-- Deve-se buscar o prettier correspondente ao style do ESLint
+
+- Ao encontrar e instalar, é necessário alterar o .prettierrc
