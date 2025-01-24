@@ -1,0 +1,38 @@
+name: Deploy Fullstack
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout do código
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Instalar o Heroku CLI
+      - name: Install Heroku CLI
+        run: |
+          curl https://cli-assets.heroku.com/install.sh | sh
+
+      # Deploy do Back-end
+      - name: Deploy Back-end
+        uses: akhileshns/heroku-deploy@v3.13.15
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: "teixeira-taskmanager-backend"
+          heroku_email: "keuvyntdev@gmail.com"
+          appdir: "./fsc-taskmanager-backend"
+
+      # Deploy do Front-end
+      - name: Deploy Front-end
+        uses: akhileshns/heroku-deploy@v3.13.15
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: "teixeira-taskmanager-frontend"
+          heroku_email: "keuvyntdev@gmail.com"
+          appdir: "./fsc-taskmanager-frontend"
