@@ -20,7 +20,6 @@ jobs:
       # Fazer o deploy no Heroku
       - uses: akhileshns/heroku-deploy@v3.13.15
         with:
-          heroku_api_key: ${{ secrets.HEROKU_API_KEY_FRONT }}
+          heroku_api_key: ${{secrets.HEROKU_API_KEY_FRONT}}
           heroku_app_name: "teixeira-taskmanager-frontend" # Nome único no Heroku
           heroku_email: "keuvyntdev@gmail.com"
-          appdir: "./fsc-taskmanager-frontend"
