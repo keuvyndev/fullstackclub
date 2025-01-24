@@ -14,7 +14,9 @@ const Tasks = () => {
     // Requer useCallBack por causa do useEffect
     const fetchTasks = useCallback(async () => {
         try {
-            const { data } = await axios.get("http://localhost:8000/tasks");
+            const { data } = await axios.get(
+                `${process.env.REACT_APP_API_URL}/tasks`
+            );
             setTasks(data);
         } catch (_e) {
             toast.error("Houve um erro ao buscar as tarefas ...");
