@@ -1,0 +1,25 @@
+name: Deploy Backend
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Baixar o código do repositório
+      - uses: actions/checkout@v2
+
+      # Configurar o diretório do backend
+      - name: Navegar para o diretório do backend
+        working-directory: ./fsc-taskmanager-backend
+        run: echo "Entrando no diretório do backend"
+
+      # Fazer o deploy no Heroku
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: "teixeira-task-manager" # Nome único no Heroku
+          heroku_email: "keuvyntdev@gmail.com"
